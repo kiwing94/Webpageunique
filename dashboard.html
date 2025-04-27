@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <title>📚 Dashboard | Din plats</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module">
+    import { auth } from './firebase.js';
+    import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>📚 Din plats</h1>
+    <p>Här finns dina tankar, dina frön, din värld i rörelse. Allt du skapat och allt du ännu inte hunnit skriva.</p>
+    <ul>
+      <li><a href="share.html">✍️ Skriv något nytt</a></li>
+      <li><a href="account.html">👤 Gå till din profil</a></li>
+      <li><a href="explore.html">🔍 Upptäck andras skapelser</a></li>
+    </ul>
+  </div>
+</body>
+</html>

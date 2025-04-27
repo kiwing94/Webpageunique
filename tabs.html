@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tab Implementation Example</title>
+  <link rel="stylesheet" href="style.css"> <!-- Ensure this points to your CSS file -->
+</head>
+<body>
+  <div class="container">
+    <!-- Tab Buttons -->
+    <div class="tab-nav">
+      <button class="tab-btn" onclick="showTab(0)">Tab 1</button>
+      <button class="tab-btn" onclick="showTab(1)">Tab 2</button>
+      <button class="tab-btn" onclick="showTab(2)">Tab 3</button>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="content1">
+      <h3>Tab 1: Introduction</h3>
+      <p>This is the content for Tab 1.</p>
+    </div>
+    <div class="tab-content" id="content2">
+      <h3>Tab 2: Features</h3>
+      <p>This is the content for Tab 2.</p>
+    </div>
+    <div class="tab-content" id="content3">
+      <h3>Tab 3: Contact</h3>
+      <p>This is the content for Tab 3.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script> <!-- Ensure this points to your JS file -->
+</body>
+</html>

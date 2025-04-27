@@ -1,0 +1,1 @@
+// Similar to lesson.js, update for enthusiast-specific content handling

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>✍️ Create Account</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #f4f4f9;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #5c2d91;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #5c2d91;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #9b58a0;
+    }
+
+    p {
+      margin-top: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #5c2d91;
+    }
+
+    a:hover {
+      color: #9b58a0;
+    }
+
+    .loading {
+      color: #5c2d91;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✍️ Create Account</h1>
+    <input type="email" id="email" placeholder="📧 Email" required />
+    <input type="password" id="password" placeholder="🔒 Create Password" required minlength="6" />
+    <button onclick="register()">✨ Register</button>
+
+    <p>🔐 Already have an account? <a href="login.html">🔑 Log in</a></p>
+    <p id="loading" class="loading" style="display: none;">🔄 Registering...</p>
+  </div>
+
+  <script type="module">
+    import { auth, db } from './firebase.js';
+    import { createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
+    import { doc, setDoc } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js';
+
+    window.register = async () => {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const loadingElement = document.getElementById('loading');
+      loadingElement.style.display = 'block'; // Show loading text
+
+      // Basic validation for email and password
+      if (!email || !password) {
+        alert("❌ Please fill in both email and password.");
+        loadingElement.style.display = 'none'; // Hide loading text
+        return;
+      }
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        await setDoc(doc(db, "users", user.uid), {
+          email: user.email,
+          points: 0 // Initial user points or data
+        });
+
+        alert("🎉 Account created successfully!");
+        window.location.href = "dashboard.html";
+      } catch (error) {
+        console.error("Error during registration:", error);
+        alert("❌ Error during registration: " + error.message);
+      } finally {
+        loadingElement.style.display = 'none'; // Hide loading text after operation
+      }
+    };
+  </script>
+</body>
+</html>

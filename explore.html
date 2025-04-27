@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <title>🔍 Utforska dikter</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .poem-card {
+      background-color: #1e1e1e;
+      color: #fbe3f9;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      box-shadow: 0 0 10px rgba(255, 105, 180, 0.15);
+      text-align: left;
+    }
+    .poem-card h3 {
+      color: #f8c3f9;
+      margin-bottom: 0.5rem;
+    }
+    .loading {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #f8c3f9;
+    }
+    .no-poems {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #f8c3f9;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🫂 Utforska dikter</h1>
+    <div id="poemList" class="loading">
+      <p>🔄 Laddar dikter...</p>
+    </div>
+    <p><a href="dashboard.html">⬅️ Tillbaka till din plats</a></p>
+  </div>
+
+  <script type="module">
+    import { db } from './firebase.js';
+    import {
+      collection,
+      getDocs,
+      query,
+      orderBy,
+      limit
+    } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js';
+
+    async function fetchPoems() {
+      const poemList = document.getElementById("poemList");
+      poemList.innerHTML = "";  // Clear loading text
+
+      try {
+        const q = query(collection(db, "posts"), orderBy("created", "desc"), limit(10));
+        const snapshot = await getDocs(q);
+
+        if (snapshot.empty) {
+          poemList.innerHTML = "<p class='no-poems'>😢 Inga dikter hittades.</p>";
+        } else {
+          snapshot.forEach(doc => {
+            const data = doc.data();
+            const div = document.createElement("div");
+            div.className = "poem-card";
+            div.innerHTML = `
+              <h3>📝 ${data.title}</h3>
+              <p>${data.content.substring(0, 100)}...</p>
+              <p style="font-size:0.8rem;">✍️ Av: ${data.user || "Okänd"}</p>
+            `;
+            poemList.appendChild(div);
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching poems: ", error);
+        poemList.innerHTML = "<p class='no-poems'>❗ Något gick fel vid hämtning av dikterna. Försök igen senare.</p>";
+      }
+    }
+
+    fetchPoems();
+  </script>
+</body>
+</html>
