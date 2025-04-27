@@ -1,19 +1,30 @@
-<html>
-<head><title>Student Section</title></head>
-<body>
-  <select id="languageSwitcher" onchange="changeLanguage()">
-    <option value="en">English</option>
-    <option value="sv">Swedish</option>
-    <option value="es">Spanish</option>
-    <option value="it">Italian</option>
-    <option value="pt">Portuguese</option>
-    <option value="fr">French</option>
-  </select>
 
-  <h1 id="welcomeMessage" data-translate="welcome"></h1>
-  <div id="studentSection" style="display: none;">
-    <h3 data-translate="selectLesson"></h3>
-    <ul id="availableLessons"></ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join Lesson | Kiwing</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Join a Lesson</h1>
+      <p>Search and join lessons created by other users.</p>
+    </header>
+
+    <section>
+      <label for="lesson_id">Lesson ID:</label>
+      <input type="text" id="lesson_id" name="lesson_id" required />
+      
+      <button>Join Lesson</button>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Edwin Gustavsson. All Rights Reserved.</p>
+    </footer>
   </div>
 </body>
 </html>
+    

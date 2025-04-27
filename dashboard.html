@@ -1,29 +1,33 @@
+
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>📚 Dashboard | Din plats</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Kiwing</title>
   <link rel="stylesheet" href="style.css" />
-  <script type="module">
-    import { auth } from './firebase.js';
-    import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
-
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = "index.html";
-      }
-    });
-  </script>
 </head>
 <body>
   <div class="container">
-    <h1>📚 Din plats</h1>
-    <p>Här finns dina tankar, dina frön, din värld i rörelse. Allt du skapat och allt du ännu inte hunnit skriva.</p>
-    <ul>
-      <li><a href="share.html">✍️ Skriv något nytt</a></li>
-      <li><a href="account.html">👤 Gå till din profil</a></li>
-      <li><a href="explore.html">🔍 Upptäck andras skapelser</a></li>
-    </ul>
+    <header>
+      <h1>Your Dashboard</h1>
+      <p>Keep track of your activities and manage your content here.</p>
+    </header>
+
+    <section>
+      <h2>Activities</h2>
+      <p>Here you can see your latest activities, posts, and lessons.</p>
+      <ul>
+        <li><a href="my_lessons.html">My Lessons</a></li>
+        <li><a href="my_posts.html">My Posts</a></li>
+        <li><a href="my_shared_content.html">Shared Content</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Edwin Gustavsson. All Rights Reserved.</p>
+    </footer>
   </div>
 </body>
 </html>
+    

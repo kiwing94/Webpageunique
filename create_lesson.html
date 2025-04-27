@@ -1,37 +1,35 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Lesson</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Lesson | Kiwing</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="container">
+    <header>
+      <h1>Create a Lesson</h1>
+      <p>Create a new lesson and share it with others.</p>
+    </header>
 
-  <!-- Language Switcher Dropdown -->
-  <select id="languageSwitcher" onchange="changeLanguage()">
-    <option value="en">English</option>
-    <option value="sv">Swedish</option>
-    <option value="es">Spanish</option>
-    <option value="it">Italian</option>
-    <option value="pt">Portuguese</option>
-    <option value="fr">French</option>
-  </select>
+    <section>
+      <form action="create_lesson_submit.html" method="post">
+        <label for="lesson_title">Lesson Title:</label>
+        <input type="text" id="lesson_title" name="lesson_title" required />
+        
+        <label for="lesson_content">Lesson Content:</label>
+        <textarea id="lesson_content" name="lesson_content" rows="10" required></textarea>
+        
+        <button type="submit">Create Lesson</button>
+      </form>
+    </section>
 
-  <!-- Create Lesson Form -->
-  <h1 id="welcomeMessage" data-translate="welcome"></h1>
-  <form id="lessonForm">
-    <label for="lessonTitle" data-translate="lessonTitle"></label>
-    <input type="text" id="lessonTitle" required>
-
-    <label for="lessonDescription" data-translate="description"></label>
-    <textarea id="lessonDescription" required></textarea>
-
-    <button type="submit" data-translate="createLesson">Create Lesson</button>
-  </form>
-
-  <script src="js/lesson.js"></script>
-  <script src="js/langSwitch.js"></script>
-
+    <footer>
+      <p>&copy; 2025 Edwin Gustavsson. All Rights Reserved.</p>
+    </footer>
+  </div>
 </body>
 </html>
+    

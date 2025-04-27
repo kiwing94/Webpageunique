@@ -1,87 +1,31 @@
+
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile | Kiwing</title>
   <link rel="stylesheet" href="style.css" />
-  <script type="module">
-    import { auth, db } from './firebase.js';
-    import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
-    import { doc, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js';
-
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) {
-        window.location.href = "index.html";  // Redirect if not logged in
-      } else {
-        // Fetch user profile data from Firestore
-        const userDocRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(userDocRef);
-
-        if (docSnap.exists()) {
-          const userData = docSnap.data();
-          document.getElementById("username").textContent = userData.username || "Användarnamn saknas";
-          document.getElementById("bio").textContent = userData.bio || "Inget biografiskt info ännu.";
-          // Display user content (posts or poems)
-          let contentList = userData.posts ? userData.posts.map(post => `<li>${post}</li>`).join('') : 'Inga inlägg ännu.';
-          document.getElementById("user-posts").innerHTML = contentList;
-        } else {
-          console.log("No such user data!");
-        }
-      }
-    });
-
-    // Handle profile update
-    async function updateProfile() {
-      const user = auth.currentUser;
-      if (user) {
-        const newUsername = document.getElementById("new-username").value.trim();
-        const newBio = document.getElementById("new-bio").value.trim();
-
-        if (!newUsername || !newBio) {
-          alert("Vänligen fyll i både användarnamn och biografi.");
-          return;
-        }
-
-        const userDocRef = doc(db, "users", user.uid);
-        await updateDoc(userDocRef, {
-          username: newUsername,
-          bio: newBio
-        });
-
-        // Update profile information on the page
-        document.getElementById("username").textContent = newUsername;
-        document.getElementById("bio").textContent = newBio;
-
-        alert("Profilen har uppdaterats!");
-      }
-    }
-  </script>
 </head>
 <body>
   <div class="container">
-    <h1>Hello! <span id="username">Loading...</span></h1>
-    <p>This is your creative space and your journey.</p>
+    <header>
+      <h1>Your Profile</h1>
+      <p>View and edit your user profile here.</p>
+    </header>
 
-    <!-- Profile Edit Form -->
     <section>
-      <h2>Redigera din profil</h2>
-      <form id="profile-form">
-        <label for="new-username">Nytt användarnamn:</label><br>
-        <input type="text" id="new-username" placeholder="Skriv ditt nya användarnamn" /><br><br>
-        <label for="new-bio">Bio:</label><br>
-        <textarea id="new-bio" placeholder="Skriv din biografi..."></textarea><br><br>
-        <button type="button" onclick="updateProfile()">Uppdatera profil</button>
-      </form>
+      <h2>User Information</h2>
+      <p><strong>Username:</strong> EdwinGustavsson</p>
+      <p><strong>Email:</strong> example@kiwing.org</p>
+      
+      <button>Edit Profile</button>
     </section>
 
-    <!-- Display User Posts -->
-    <section>
-      <h2>Inlägg och dikter:</h2>
-      <ul id="user-posts">
-        <!-- Posts will be displayed here -->
-      </ul>
-    </section>
+    <footer>
+      <p>&copy; 2025 Edwin Gustavsson. All Rights Reserved.</p>
+    </footer>
   </div>
 </body>
 </html>
-
+    
